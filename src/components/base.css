@@ -1,0 +1,8 @@
+.page__control {
+  width: var(--container-width);
+  min-height: 100vh;
+  margin: auto;
+  padding: 2.75rem 0 9rem;
+  display: grid;
+  grid-template-columns: 100%;
+}
