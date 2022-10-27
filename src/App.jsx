@@ -1,5 +1,4 @@
 import './index.css'
-import Profile from './components/Profile/Profile'
 import Container from './components/Container'
 
 function App() {
