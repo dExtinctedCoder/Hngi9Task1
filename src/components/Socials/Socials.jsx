@@ -6,8 +6,8 @@ import { GithubIcon, SlackIcon } from '../Icons/Icon'
 const Socials = () => {
   return (
     <div className="social__icons-div">
-      <SlackIcon />
-      <GithubIcon />
+      <a href="#"><SlackIcon /></a>
+      <a href="#"><GithubIcon /></a>
     </div>
   )
 }

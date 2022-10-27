@@ -11,8 +11,23 @@
 }
 
 .links__control a {
-  padding: 1.5rem 0;
+  padding: 1.5rem 2rem;
   border-radius: 8px;
   background-color: var(--link-color);
   font-size: 0.875rem;
+  color: inherit;
+}
+
+.links__control a:hover {
+  background-color: var(--link-hovered)
+}
+
+.links__control a:focus {
+  background-color: var(--link-focus)
+}
+
+@media screen and (min-width: 768px) {
+  .links__control {
+    padding-bottom: 5.5rem;
+  }
 }

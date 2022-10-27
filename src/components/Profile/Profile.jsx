@@ -8,7 +8,10 @@ const Profile = () => {
     <section className="profile__section">
 
       <div className="profile__icon">
-        <ShareIconMobile/>
+        <div>
+          <ShareIconMobile/>
+          <ShareIconDesktop/>
+        </div>
       </div>
 
       <div className="profile__img-div">

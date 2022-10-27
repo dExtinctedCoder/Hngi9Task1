@@ -5,14 +5,30 @@
 }
 
 .profile__icon {
-  width: 100%;
+  width: min(100%, (46rem / 1.25));
   display: flex;
   justify-content: flex-end;
 }
 
-.profile__icon svg {
-  width: 2.75rem;
+.profile__icon>div {
+  cursor: pointer;
+  position: relative;
+  width: 2.5rem;
   aspect-ratio: 1;
+}
+
+.profile__icon svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.profile__icon svg:first-child {
+  z-index: 1;
+}
+
+.profile__icon svg:last-child {
+  display: none;
 }
 
 .profile__img-div {
@@ -33,4 +49,15 @@
 
 #profile__name {
   margin: 1.5rem 0.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .profile__icon svg:first-child {
+    display: none;
+  }
+  
+  .profile__icon svg:last-child {
+    display: block;
+    z-index: 1;
+  }
 }
