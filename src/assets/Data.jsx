@@ -3,17 +3,17 @@ export const linkInfo = [
   {
     id: "twitter",
     href: "https://twitter.com/dextinctedcoder",
-    subText: "Twitter Link",
+    subText: "dExtinctedCoder",
   },
   {
     id: 'btn__zuri',
     href: "https://training.zuri.team/",
-    subText: "Zuri Team",
+    subText: "The Zuri Team",
   },
   {
     id: "books",
     href: "http://books.zuri.team ",
-    subText: "Zuri Books",
+    subText: "Zuri Books on design and coding",
   },
   {
     id: "book__python",
@@ -28,7 +28,7 @@ export const linkInfo = [
   {
     id: "book__design",
     href: "https://books.zuri.team/design-rules ",
-    subText: "Design Books",
+    subText: "Free Design Books",
   },
 ]
 // export default linkInfo
