@@ -12,6 +12,7 @@ const Profile = () => {
           <ShareIconMobile/>
           <ShareIconDesktop/>
         </div>
+        <span id='icon__label'>Share Link</span>
       </div>
 
       <div className="profile__img-div">

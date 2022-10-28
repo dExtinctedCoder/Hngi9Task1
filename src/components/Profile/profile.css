@@ -8,6 +8,7 @@
   width: min(100%, (46rem / 1.25));
   display: flex;
   justify-content: flex-end;
+  position: relative;
 }
 
 .profile__icon>div {
@@ -15,6 +16,39 @@
   position: relative;
   width: 2.5rem;
   aspect-ratio: 1;
+}
+
+.profile__icon>span {
+  display: none;
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  background: red;
+  transform: translateX(-50%);
+  padding-left: 1rem;
+  padding-block: 1rem;
+  font-size: 0.75rem;
+  z-index: 2;
+  overflowY: hidden;
+  border-radius: 5px;
+  background: #101828;
+  color: #fff;
+}
+
+.profile__icon>span::after {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  background: inherit;
+  z-index: -1;
+  right: -2.5em;
+  transform: rotate(45deg);
+}
+
+.profile__icon>div:hover + span {
+  display: flex;
 }
 
 .profile__icon svg {
