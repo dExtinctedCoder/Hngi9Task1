@@ -1,6 +1,8 @@
 .contact__base {
-  padding: 1.25rem 0rem;
+  padding: 4rem 0rem;
   margin-bottom: 4.125rem;
+  width: var(--container-width-md);
+  margin: 0 auto;
 }
 
 .form__heading {
@@ -25,9 +27,14 @@
 
 .form__proper {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
   row-gap: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.form__field {
+  width: 100%;
 }
 
 .form__field label {
@@ -87,10 +94,6 @@
 }
 
 .supporting__text {
-  /* display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-start;
-  column-gap: 0.75rem; */
   margin-bottom: 2rem;
 }
 
@@ -101,7 +104,6 @@
   -ms-user-select: none;
   user-select: none;
 }
-
 
 .supporting__text input[type="checkbox"] {
   position: absolute;
@@ -157,48 +159,6 @@
   inset: 0rem;
 }
 
-/* Customize the label (the container) */
-
-
-/* Hide the browser's default checkbox */
-.container input {
-  
-}
-
-/* Create a custom checkbox */
-
-
-/* On mouse-over, add a grey background color */
-
-/* When the checkbox is checked, add a blue background */
-.container 
-
-/* Create the checkmark/indicator (hidden when not checked) */
-
-/* Show the checkmark when checked */
-.container
-
-/* Style the checkmark/indicator */
-.container
-
-
-
-
-
-/* .supporting__text input[type="checkbox"]:checked {
-  
-}
-
-.supporting__text input[type="checkbox"]:focus {
-  
-}
-
-.supporting__text input[type="checkbox"]:disabled {
-  background: #F2F4F7;
-  border: 1px solid #D0D5DD;
-  border-radius: 6px;
-} */
-
 .supporting__text label {
   font-weight: 400;
   font-size: 1rem;
@@ -232,4 +192,13 @@ button[type="submit"]:disabled {
   border: 1px solid #B2DDFF;
 }
 
+@media screen and (min-width: 768px) {
+  .form__field:first-child {
+    width: 49%;
+  }
 
+  .form__field:nth-child(2) {
+    width: 49%;
+    margin-left: auto;
+  }
+}
