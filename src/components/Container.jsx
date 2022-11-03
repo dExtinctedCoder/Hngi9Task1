@@ -10,20 +10,23 @@ import './base.css'
 const Container = () => {
   return (
     <>
-      <div className="page__control">
 
       <Routes>
-        <Route path="/Hngi9Task1/" element={[<Profile key={1}/>, <Links key={2}/>, <Socials key={3}/>]}>  
-          {/* <Profile/>
-          <Links />
-          <Socials /> */}
+        <Route path="/Hngi9Task1/" element={
+          [
+          <div className="page__control">
+            <Profile />, 
+            <Links />, 
+            <Socials />
+          </div>
+        ]}
+        >
         </Route>
 
         <Route path="/Hngi9Task1/contact" element={<Contact />}/>
       </Routes>
 
       <Footer />
-      </div>
     </>
   )
 }
