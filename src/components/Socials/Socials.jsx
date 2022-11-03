@@ -7,7 +7,7 @@ const Socials = () => {
   return (
     <div className="social__icons-div">
       <a href="#"><SlackIcon /></a>
-      <a href="https://github.com/dExtinctedCoder/Hngi9Task1"><GithubIcon /></a>
+      <a href="https://github.com/dExtinctedCoder/Hngi9Task1" target="_blank"><GithubIcon /></a>
     </div>
   )
 }
