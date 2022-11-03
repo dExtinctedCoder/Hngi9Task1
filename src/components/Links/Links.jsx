@@ -12,7 +12,7 @@ const Links = () => {
         linkInfo.map(({id, href, subText, asLink, to}) => {
 
           if (asLink) {
-            return <li key={id}><Link to={to ? to : ''} target="_blank" id={id}>{subText}</Link></li>
+            return <li key={id}><Link to={to ? to : ''} id={id}>{subText}</Link></li>
           }
 
           return <li key={id}><a href={href ? href : null} target="_blank" id={id}>{subText}</a></li>
