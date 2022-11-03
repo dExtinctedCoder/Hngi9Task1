@@ -22,8 +22,8 @@ const Container = () => {
         <Route path="/Hngi9Task1/contact" element={<Contact />}/>
       </Routes>
 
-      </div>
       <Footer />
+      </div>
     </>
   )
 }
