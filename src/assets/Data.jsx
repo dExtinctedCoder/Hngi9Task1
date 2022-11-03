@@ -39,7 +39,7 @@ export const linkInfo = [
   {
     id: "contact",
     asLink: true,
-    to: "/contact",
+    to: "/Hngi9Task1/contact",
     href: "",
     subText: "Contact",
   },
