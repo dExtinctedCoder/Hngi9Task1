@@ -1,5 +1,5 @@
 .contact__base {
-  padding: 4rem 0rem;
+  padding: 4rem 0.5rem;
   margin-bottom: 4.125rem;
   width: var(--container-width-md);
   margin: 0 auto;
@@ -9,8 +9,11 @@
 
 #submit__alert {
   position: absolute;
-  /* width: min(40vw); */
+  width: min(80vw, 260px);
   /* border: 2px solid; */
+  text-align: center;
+  font-family: inherit;
+  font-size: 0.875rem;
   background-color: #fff;
   z-index: 3;
   right: 2rem;

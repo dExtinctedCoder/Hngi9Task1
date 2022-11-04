@@ -1,4 +1,4 @@
-import React, { useState, useReducer, createRef } from 'react'
+import React, { useState, useEffect, useReducer, createRef } from 'react'
 import './contact.css'
 import useInput from '../hooks/useInput'
 
@@ -48,7 +48,6 @@ const reducer = (currentState, action) => {
 const Contact = () => {
   
   const user = "dEx"
-  const errorDisplay = "Field cannot be empty!"
 
   const [firstNameState, setFirstNameValue] = useInput("text")
   const [lastNameState, setlastNameValue] = useInput("text")
@@ -56,6 +55,7 @@ const Contact = () => {
   const [messageState, setMessageValue] = useInput("")
 
   const [successMsg, setSuccessMsg] = useState(false)
+  const [checkbox, setCheckbox] = useState(true)
   const [errorState, dispatch] = useReducer(reducer, initError)
   
   
@@ -92,29 +92,38 @@ const Contact = () => {
   const lastNameRef = createRef()
   const emailRef = createRef()
   const messageRef = createRef()
+  const checkboxRef = createRef()
+  const successRef = createRef()
 
+  
+  // useEffect(() => {
+  //   setCheckbox(true)
+  //   checkboxRef.current.classList.add("show")
+
+  // }, [checkbox])
   
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    
+    const errorDisplay = "Please enter "
     
     if (!firstNameState.value.length) {
       firstNameRef.current.focus()
-      dispatch({type: "SET__FIRSTNAME", payload: errorDisplay})
+      dispatch({type: "SET__FIRSTNAME", payload: `${errorDisplay}your name`})
       return
 
     } else dispatch({type: "SET__FIRSTNAME", payload: ""})
 
     if (!lastNameState.value.length) {
       lastNameRef.current.focus()
-      dispatch({type: "SET__LASTNAME", payload: errorDisplay})
+      dispatch({type: "SET__LASTNAME", payload: `${errorDisplay}your name`})
       return
 
     } else dispatch({type: "SET__LASTNAME", payload: ""})
 
     if (!emailState.value.length) {
       emailRef.current.focus()
-      dispatch({type: "SET__EMAIL", payload: errorDisplay})
+      dispatch({type: "SET__EMAIL", payload: `${errorDisplay}your email`})
 
       return
 
@@ -123,7 +132,7 @@ const Contact = () => {
     if (!messageState.value.length) {
       messageRef.current.focus()
       messageRef.current.classList.add("invalid")
-      dispatch({type: "SET__MESSAGE", payload: errorDisplay})
+      dispatch({type: "SET__MESSAGE", payload: `${errorDisplay}a message`})
 
       return
 
@@ -133,22 +142,30 @@ const Contact = () => {
     }
     
     setSuccessMsg(true)
-
     dispatch({type: "RESET"})
+    // console.log(checkboxRef.current.checked)
+    firstNameRef.current.blur()
+    lastNameRef.current.blur()
+    emailRef.current.blur()
+    messageRef.current.blur()
     
+    setTimeout(() => {
+      successRef.current.focus()
+    }, 300)
     setTimeout(() => {
       setSuccessMsg(false)
       setFirstNameValue("")
       setlastNameValue("")
       setEmailValue("")
       setMessageValue("")
+      document.getElementById("checkbox").checked = false;
     }, 2000)
   }
 
   return (
     <div className=" contact__base">
        
-      <div style={{transform: successMsg ? "translateX(0%)" : "translateX(150%)"}} id="submit__alert">Submission recorded successfully!</div> 
+      <input ref={successRef} type="text" readOnly style={{transform: successMsg ? "translateX(0%)" : "translateX(150%)"}} id="submit__alert" value="Submission recorded successfully!"/> 
       
       <div className=" form__heading">
         <h3>Contact Me</h3>
@@ -184,7 +201,7 @@ const Contact = () => {
           <section className=" supporting__text">
             <label htmlFor="checkbox">
               <input id="checkbox" name="_checkbox" type="checkbox" noValidate />
-              <span id="custom"></span>
+              <span ref={checkboxRef} id="custom"></span>
               <span>You agree to providing your data to {user} who may contact you.</span>
             </label>
           </section>
