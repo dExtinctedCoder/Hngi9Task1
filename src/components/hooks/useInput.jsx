@@ -12,7 +12,7 @@ function useInput(type) {
     // setPassword: setPassword,
   }
 
-  return [stateControl]
+  return [stateControl, setValue]
 }
 
 export default useInput
