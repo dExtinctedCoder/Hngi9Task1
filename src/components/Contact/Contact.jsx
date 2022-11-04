@@ -5,26 +5,31 @@ import useInput from '../hooks/useInput'
 
 const Contact = () => {
 
-  const [firstNameState] = useInput("text")
-  const [lastNameState] = useInput("text")
-  const [emailState] = useInput("email")
-  const [messageState] = useInput("")
+  const [firstNameState, setFirstNameValue] = useInput("text")
+  const [lastNameState, setlastNameValue] = useInput("text")
+  const [emailState, setEmailValue] = useInput("email")
+  const [messageState, setMessageValue] = useInput("")
 
-  // const [successMsg, setSuccessMsg] = useState(false)
+  const [successMsg, setSuccessMsg] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setSuccessMsg(true)
-    // setTimeout(() => {
-    //   setSuccessMsg(false)
-    // }, 4500)
+    setSuccessMsg(true)
+    
+    setTimeout(() => {
+      setSuccessMsg(false)
+      setFirstNameValue("")
+      setlastNameValue("")
+      setEmailValue("")
+      setMessageValue("")
+    }, 2000)
   }
   
-  // {
-  //   successMsg ? <div id="submit__alert">Blahblabha</div> : null
-  // }
   return (
     <div className=" contact__base">
+       
+      <div style={{transform: successMsg ? "translateX(0%)" : "translateX(150%)"}} id="submit__alert">Submission recorded successfully!</div> 
+      
       <div className=" form__heading">
         <h3>Contact Me</h3>
         <p>Hi there, contact me to ask me about anything you have in mind.</p>
