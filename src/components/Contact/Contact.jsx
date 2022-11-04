@@ -1,6 +1,48 @@
-import React, { useState, createRef } from 'react'
+import React, { useState, useReducer, createRef } from 'react'
 import './contact.css'
 import useInput from '../hooks/useInput'
+
+
+const initError = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  message: '',
+}
+
+const reducer = (currentState, action) => {
+  switch (action.type) {
+    case "SET__FIRSTNAME":
+      return {
+        ...currentState,
+          firstName: action.payload,
+      }
+
+    case "SET__LASTNAME":
+      return {
+        ...currentState,
+        lastName: action.payload,
+      }
+
+    case "SET__EMAIL":
+      return {
+        ...currentState,
+        email: action.payload,
+      };
+
+    case "SET__MESSAGE":
+      return {
+        ...currentState,
+        message: action.payload,
+      }
+    
+    case "RESET":
+      return initError
+
+    default:
+      return currentState
+  }
+}
 
 
 const Contact = () => {
@@ -14,69 +56,85 @@ const Contact = () => {
   const [messageState, setMessageValue] = useInput("")
 
   const [successMsg, setSuccessMsg] = useState(false)
+  const [errorState, dispatch] = useReducer(reducer, initError)
+  
+  
+  function handleInput(elem, val, dispatchVal) {
+    let setTargetState;
 
-  const init = ''
-  const [errorState, setErrorState] = useState({
-    firstName: init, lastName: init, email: init, message: init,
-  })
+    switch(val) {
+      case "FIRSTNAME":
+        setTargetState = setFirstNameValue;
+        break;
+        
+      case "LASTNAME":
+        setTargetState = setlastNameValue;
+        break;
+      case "EMAIL":
+        setTargetState = setEmailValue;
+        break;
+      case "MESSAGE":
+        setTargetState = setMessageValue;
+        messageRef.current.classList.remove("invalid")
 
+        break;
+
+      }
+      
+      setTargetState(elem.target.value)
+      if (elem.target.value.length) {
+        dispatch({type: dispatchVal, payload: ""})
+      }
+
+   }
+          
   const firstNameRef = createRef()
   const lastNameRef = createRef()
   const emailRef = createRef()
   const messageRef = createRef()
 
+  
   const handleSubmit = (event) => {
     event.preventDefault();
 
     
     if (!firstNameState.value.length) {
       firstNameRef.current.focus()
-      setErrorState({...errorState, firstName: errorDisplay})
+      dispatch({type: "SET__FIRSTNAME", payload: errorDisplay})
       return
 
-    } else {
-      setErrorState({
-        firstName: init, lastName: init, email: init, message: init,
-      })
-    }
+    } else dispatch({type: "SET__FIRSTNAME", payload: ""})
 
     if (!lastNameState.value.length) {
       lastNameRef.current.focus()
-      setErrorState({...errorState, lastName: errorDisplay})
+      dispatch({type: "SET__LASTNAME", payload: errorDisplay})
       return
 
-    } else setErrorState({
-      firstName: init, lastName: init, email: init, message: init,
-    })
+    } else dispatch({type: "SET__LASTNAME", payload: ""})
 
     if (!emailState.value.length) {
       emailRef.current.focus()
-      setErrorState({...errorState, email: errorDisplay})
+      dispatch({type: "SET__EMAIL", payload: errorDisplay})
+
       return
 
-    } else setErrorState({
-      firstName: init, lastName: init, email: init, message: init,
-    })
+    } else dispatch({type: "SET__EMAIL", payload: ""})
     
     if (!messageState.value.length) {
       messageRef.current.focus()
       messageRef.current.classList.add("invalid")
-      
-      setErrorState({...errorState, message: errorDisplay})
+      dispatch({type: "SET__MESSAGE", payload: errorDisplay})
+
       return
+
     } else  {
-      setErrorState({
-        firstName: init, lastName: init, email: init, message: init,
-      })
+      dispatch({type: "SET__MESSAGE", payload: ""})
       messageRef.current.classList.remove("invalid")
     }
     
-    console.log(errorState)
     setSuccessMsg(true)
 
-    setErrorState({
-      firstName: init, lastName: init, email: init, message: init,
-    })
+    dispatch({type: "RESET"})
     
     setTimeout(() => {
       setSuccessMsg(false)
@@ -86,7 +144,7 @@ const Contact = () => {
       setMessageValue("")
     }, 2000)
   }
-  
+
   return (
     <div className=" contact__base">
        
@@ -101,25 +159,25 @@ const Contact = () => {
           <section className=" form__proper">
             <div className=" form__field">
               <label htmlFor="first-name">First name</label>
-              <input ref={firstNameRef}  className=" field" {...firstNameState} noValidate placeholder="Enter your first name" id="first_name" />
+              <input ref={firstNameRef}  className=" field" {...firstNameState} onChange={e => handleInput(e, "FIRSTNAME", "SET__FIRSTNAME")} noValidate placeholder="Enter your first name" id="first_name" />
               <span className="errorMsg">{errorState.firstName}</span>
               
             </div>
             <div className=" form__field">
               <label htmlFor="last_name">Last name</label>
-              <input ref={lastNameRef}  className=" field" {...lastNameState} noValidate placeholder="Enter your last name" id="last_name" />
+              <input ref={lastNameRef}  className=" field" {...lastNameState} onChange={e => handleInput(e, "LASTNAME", "SET__LASTNAME")} noValidate placeholder="Enter your last name" id="last_name" />
               <span className="errorMsg">{errorState.lastName}</span>
               
             </div>
             <div className=" form__field">
               <label htmlFor=" email">Email</label>
-              <input ref={emailRef}  className=" field" {...emailState} noValidate placeholder="yourname@email.com" id="email" />
+              <input ref={emailRef}  className=" field" {...emailState} onChange={e => handleInput(e, "EMAIL", "SET__EMAIL")} noValidate placeholder="yourname@email.com" id="email" />
               <span className="errorMsg">{errorState.email}</span>
               
             </div>
             <div className=" form__field">
               <label htmlFor="message">Message</label>
-              <textarea ref={messageRef} className=" field" {...messageState}  noValidate placeholder="Send me a message and I'll reply you as soon as possible..." id="message"></textarea>
+              <textarea ref={messageRef} className=" field" {...messageState} onChange={e => handleInput(e, "MESSAGE", "SET__MESSAGE")}  noValidate placeholder="Send me a message and I'll reply you as soon as possible..." id="message"></textarea>
               <span className="errorMsg">{errorState.message}</span>
             </div>
           </section>
